@@ -1,0 +1,123 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+{% extends "@SolidInvoiceCore/Layout/Email/base.html.twig" %}
+
+{% set quotePath = url("_view_quote_external", {"uuid" : quote.uuid}) %}
+
+{%- block title -%}
+    {{ "quote.title"|trans({"%id%" : quote.id}) }}
+{%- endblock -%}
+
+{%- block header -%}
+    <div style="text-align: center" class="text-center">
+        <p>
+        <div style="font-size: 80%; color: #999999">
+            {% set link %}
+                <a rel="external" target="_blank" href="{{ quotePath }}">{{ quotePath }}</a>
+            {% endset %}
+            {% autoescape false %}
+                {{ "quote.view.online"|trans({"%url%" : link}) }}
+            {% endautoescape %}
+        </div>
+        </p>
+    </div>
+{%- endblock -%}
+
+{%- block head_extra -%}
+    <script type="application/ld+json">
+        [
+            {
+                "@context": "http://schema.org",
+                "@type": "EmailMessage",
+                "description": "View quote",
+                "potentialAction": {
+                    "@type": "ViewAction",
+                    "name": "View quote",
+                    "target": "{{ quotePath }}"
+                }
+            }
+        ]
+    </script>
+{%- endblock head_extra -%}
+
+
+{%- block content -%}
+    {% apply inky_to_html %}
+        {{ 'quote.info'|trans({'%company%': setting('system/company/company_name'), '%created%': quote.created|date}, 'email') }}
+
+        <table class="spacer">
+            <tbody>
+            <tr>
+                <td height="16px" style="font-size:16px;line-height:16px;">&#xA0;</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <row>
+            <columns>
+                <strong>Quote #</strong>
+            </columns>
+            <columns>
+                {{ quote.id }}
+            </columns>
+        </row>
+
+        <row>
+            <columns>
+                <strong>{{ 'quote.subtotal'|trans }}</strong>
+            </columns>
+            <columns class="thick-line text-right">
+                {{ quote.baseTotal|formatCurrency }}
+            </columns>
+        </row>
+        {% if quote.tax.positive %}
+            <row>
+
+                <columns>
+                    <strong>{{ 'quote.tax'|trans }}</strong>
+                </columns>
+                <columns>
+                    {{ quote.tax|formatCurrency }}
+                </columns>
+            </row>
+        {% endif %}
+
+        {% if quote.discount.type is not empty %}
+            <row>
+                <columns>
+                    <strong>{{ 'quote.discount'|trans }}</strong>
+                </columns>
+                <columns>
+                    -{{ discount(quote)|formatCurrency }}
+                </columns>
+            </row>
+        {% endif %}
+        <row>
+            <columns>
+                <strong>
+                    {{ 'quote.total'|trans }}
+                </strong>
+            </columns>
+            <columns>
+                {{ quote.total|formatCurrency }}
+            </columns>
+        </row>
+
+        <row>
+            {% if quote.terms is not empty %}
+                <columns small="12">
+                    <strong>{{ 'quote.terms'|trans }}</strong>
+                    <p>
+                        {{ quote.terms|nl2br }}
+                    </p>
+                </columns>
+            {% endif %}
+        </row>
+    {% endapply %}
+{%- endblock -%}

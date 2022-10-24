@@ -1,0 +1,29 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+
+{% block sidebar %}
+    {{ menu('payments_list') }}
+{% endblock sidebar %}
+
+{% block title %}{{ icon('credit-card') }} {{ 'payment.list.title'|trans }}{% endblock title %}
+{% block page_title %}{{ 'payment.list.title'|trans }}{% endblock page_title %}
+
+{% block content %}
+    <div class="card filterable">
+	    {{ render_grid('payment_grid') }}
+    </div>
+
+    <h5>{{ "payment.list.status_legend"|trans }}</h5>
+
+    {% for status in payment_label() %}
+	    {{ status|raw }}
+    {% endfor %}
+{% endblock content %}

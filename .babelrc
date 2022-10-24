@@ -1,0 +1,11 @@
+{
+  "presets": ["@babel/env"],
+  "ignore": [
+    "csbillcore/js/lib/**/*.js",
+    "csbillcore/js/app.js",
+    "**/router.js"
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import"
+  ]
+}

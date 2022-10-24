@@ -1,0 +1,55 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@SolidInvoiceCore/Layout/Email/notification.html.twig" %}
+
+{%- block title -%}
+    {{ 'payment.description'|trans({}, 'email') }}
+{%- endblock -%}
+
+{%- block content -%}
+    {% apply inky_to_html %}
+        {% if payment.invoice is not empty %}
+            <row>
+                <columns><strong>{{ 'payment.details.invoice'|trans({}, 'email') }}</strong></columns>
+                <columns>
+                    <a href="{{ url('_invoices_view', {'id' : payment.invoice.id }) }}">{{ payment.invoice.id }}</a>
+                </columns>
+            </row>
+        {% endif %}
+
+        {% if payment.client is not empty %}
+            <row>
+                <columns><strong>{{ 'payment.details.client'|trans({}, 'email') }}</strong></columns>
+                <columns><a href="{{ url('_clients_view', {'id' : payment.client.id}) }}">{{ payment.client }}</a></columns>
+            </row>
+        {% endif %}
+
+        <row>
+            <columns><strong>{{ 'payment.details.method'|trans({}, 'email') }}</strong></columns>
+            <columns>{{ payment.method }}</columns>
+        </row>
+
+        <row>
+            <columns><strong>{{ 'payment.details.currency'|trans({}, 'email') }}</strong></columns>
+            <columns>{{ payment.currencyCode }}</columns>
+        </row>
+
+        <row>
+            <columns><strong>{{ 'payment.details.amount'|trans({}, 'email') }}</strong></columns>
+            <columns>{{ payment.totalAmount|formatCurrency }}</columns>
+        </row>
+
+        <row>
+            <columns><strong>{{ 'payment.details.status'|trans({}, 'email') }}</strong></columns>
+            <columns>{{ payment_label(payment.status) }}</columns>
+        </row>
+
+    {% endapply %}
+{%- endblock -%}

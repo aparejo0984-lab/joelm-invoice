@@ -1,0 +1,180 @@
+{
+    "name": "solidinvoice/solidinvoice",
+    "type": "application",
+    "description": "General Billing Application",
+    "keywords": [
+        "billing",
+        "general billing",
+        "open-source billing"
+    ],
+    "homepage": "http://solidinvoice.co",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pierre du Plessis",
+            "email": "info@solidinvoice.co"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-pdo": "*",
+        "ext-soap": "*",
+        "ext-xsl": "*",
+        "api-platform/core": "^2.6",
+        "async-aws/ses": "^1.3",
+        "composer/package-versions-deprecated": "^1.8",
+        "defuse/php-encryption": "^2.2",
+        "doctrine/cache": "^1.10",
+        "doctrine/common": "^2.11",
+        "doctrine/dbal": "^2.9",
+        "doctrine/doctrine-bundle": "^2.0",
+        "doctrine/doctrine-migrations-bundle": "^2.1",
+        "doctrine/migrations": "^2.2",
+        "doctrine/orm": "^2.7",
+        "dragonmantank/cron-expression": "^2.3",
+        "egulias/email-validator": "^2.1",
+        "friendsofsymfony/jsrouting-bundle": "^2.5",
+        "knplabs/knp-menu-bundle": "^2.3",
+        "moneyphp/money": "3.1.x",
+        "moontoast/math": "^1.1",
+        "mpdf/mpdf": "^8.0",
+        "mpociot/vat-calculator": "^2.4",
+        "namshi/notificator": "^5.1",
+        "nesbot/carbon": "^2.28",
+        "ocramius/proxy-manager": "^2.1",
+        "pagerfanta/pagerfanta": "^2.1",
+        "payum/authorize-net-aim": "^1.5",
+        "payum/be2bill": "^1.5",
+        "payum/klarna-checkout": "^1.5",
+        "payum/klarna-invoice": "^1.5",
+        "payum/offline": "^1.5",
+        "payum/payex": "^1.5",
+        "payum/paypal-express-checkout-nvp": "^1.5",
+        "payum/paypal-pro-checkout-nvp": "^1.5",
+        "payum/payum-bundle": "^2.3",
+        "payum/stripe": "^1.5",
+        "php-http/guzzle6-adapter": "^2.0",
+        "ramsey/uuid": "^3.9",
+        "ramsey/uuid-doctrine": "^1.5",
+        "sensio/framework-extra-bundle": "^5.5",
+        "solidworx/form-handler-bundle": "^1.0",
+        "stof/doctrine-extensions-bundle": "^1.3",
+        "swiftmailer/swiftmailer": "^6.2",
+        "symfony/amazon-mailer": "^5.1",
+        "symfony/config": "^4.4",
+        "symfony/console": "^4.4",
+        "symfony/dependency-injection": "^4.4",
+        "symfony/doctrine-bridge": "^4.4",
+        "symfony/dotenv": "^4.4",
+        "symfony/event-dispatcher": "^4.4",
+        "symfony/expression-language": "^4.4",
+        "symfony/filesystem": "^4.4",
+        "symfony/finder": "^4.4",
+        "symfony/flex": "^1.10",
+        "symfony/form": "^4.4",
+        "symfony/framework-bundle": "^4.4",
+        "symfony/google-mailer": "^4.4",
+        "symfony/http-client": "^5.1",
+        "symfony/http-foundation": "^4.4",
+        "symfony/http-kernel": "^4.4",
+        "symfony/intl": "^4.4",
+        "symfony/mailchimp-mailer": "^5.1",
+        "symfony/mailer": "^5.1",
+        "symfony/mailgun-mailer": "^5.1",
+        "symfony/mime": "^4.4 || ^5.0",
+        "symfony/monolog-bundle": "^3.5",
+        "symfony/options-resolver": "^4.4",
+        "symfony/polyfill": "^1.21",
+        "symfony/postmark-mailer": "^5.1",
+        "symfony/property-access": "^4.4",
+        "symfony/property-info": "^4.4",
+        "symfony/proxy-manager-bridge": "^4.4",
+        "symfony/requirements-checker": "^1.1",
+        "symfony/routing": "^4.4",
+        "symfony/security": "^4.4",
+        "symfony/security-bundle": "^4.4",
+        "symfony/sendgrid-mailer": "^5.1",
+        "symfony/serializer": "^4.4",
+        "symfony/swiftmailer-bundle": "^3.4",
+        "symfony/translation": "^4.4",
+        "symfony/twig-bundle": "^4.4",
+        "symfony/validator": "^4.4",
+        "symfony/webpack-encore-bundle": "^1.15",
+        "symfony/workflow": "^4.4",
+        "symfony/yaml": "^4.4",
+        "tijsverkoyen/css-to-inline-styles": "^2.2",
+        "twig/cssinliner-extra": "^3.3",
+        "twig/extra-bundle": "^3.3",
+        "twig/inky-extra": "^3.3",
+        "twig/markdown-extra": "^3.3",
+        "twig/twig": "^2.12",
+        "twilio/sdk": "^5.41",
+        "willdurand/js-translation-bundle": "^2.6",
+        "willdurand/negotiation": "^3.0"
+    },
+    "require-dev": {
+        "ext-zip": "*",
+        "dama/doctrine-test-bundle": "^6.3",
+        "dbrekelmans/bdi": "^1.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "fzaninotto/faker": "^1.9",
+        "liip/test-fixtures-bundle": "^1.6",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "mockery/mockery": "^1.3",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-doctrine": "^0.12",
+        "phpstan/phpstan-mockery": "^0.12",
+        "phpstan/phpstan-phpunit": "^0.12",
+        "phpstan/phpstan-symfony": "^0.12",
+        "symfony/debug-bundle": "^5.0",
+        "symfony/maker-bundle": "^1.17",
+        "symfony/panther": "^1.1 || ^2.0",
+        "symfony/phpunit-bridge": "^5.0",
+        "symfony/web-profiler-bundle": "^4.4",
+        "symfony/web-server-bundle": "^4.4"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "platform": {
+            "php": "7.3.5"
+        },
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev"
+        },
+        "symfony": {
+            "allow-contrib": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "SolidInvoice\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "cp .env.dist .env",
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "requirements-checker": "script"
+        }
+    }
+}

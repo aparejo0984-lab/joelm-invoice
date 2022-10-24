@@ -1,0 +1,57 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends '@SolidInvoiceCore/Layout/' ~ (app.user is not empty ? 'default' : 'default_no_nav') ~ '.html.twig' %}
+
+{% set module = "payment-capture" %}
+{% set moduleData = internal %}
+
+{% block title %}{{ "payment.create.tite"|trans|replace({"%id%" : invoice.id}) }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="with-border">
+                        {% if invoice.client.credit.value is not empty %}
+                            <div class="float-right">
+                                {{ 'payment.create.credit'|trans }}
+                                {{ invoice.client.credit.value|formatCurrency }}
+                            </div>
+                        {% endif %}
+
+                        <h3>
+                            {{ invoice.client.name }}
+                            <small>{{ client_label(invoice.client.status) }}</small>
+                        </h3>
+                    </div>
+                    {% embed "@SolidInvoiceInvoice/invoice_template.html.twig" %}
+                        {% block header %}{% endblock header %}
+                        {% block footer %}{% endblock footer %}
+                    {% endembed %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+
+                    <button type="submit" class="btn btn-info">{{ icon('credit-card') }} {{ 'payment.action.pay'|trans }}</button>
+                    <a href="javascript:history.go(-1)" class="btn btn-warning">
+                        {{ icon('reply') }} {{ 'payment.create.cancel'|trans }}
+                    </a>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

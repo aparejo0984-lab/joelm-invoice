@@ -1,0 +1,15 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@SolidInvoiceCore/Layout/Email/base.html.twig" %}
+
+{%- block footer -%}
+    <hr />
+    <small>You can update your notification settings <a href="{{ url('_settings') }}">here</a></small>
+{%- endblock -%}

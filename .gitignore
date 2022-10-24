@@ -1,0 +1,58 @@
+public/static
+public/bundles
+public/css/*
+public/js/*
+public/fonts/*
+public/img/*
+public/manifest.json
+assets/js/translations
+assets/js/js_routes.json
+var/
+build/
+vendor
+bin/*
+!bin/console
+!bin/check
+composer.phar
+!public/js/.gitkeep
+!public/css/.gitkeep
+!public/fonts/.gitkeep
+!public/img/.gitkeep
+config/env.php
+.idea
+node_modules
+.rules
+.php_cs.cache
+.php-cs-fixer.cache
+.phpunit.result.cache
+.env
+yarn-error.log
+/vendor-bin/**/vendor
+/drivers
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###

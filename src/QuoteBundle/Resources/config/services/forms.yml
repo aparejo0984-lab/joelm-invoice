@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+        tags:
+            - { name: form.type }
+
+    SolidInvoice\QuoteBundle\Form\Type\QuoteType: ~
+
+    SolidInvoice\QuoteBundle\Form\Type\ItemType: ~

@@ -1,0 +1,43 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@SolidInvoiceCore/Layout/Email/notification.html.twig" %}
+
+{%- block title -%}
+    {{ 'quote.status_change.heading'|trans({}, 'email') }}
+{%- endblock -%}
+
+{%- block content -%}
+    {% apply inky_to_html %}
+        <row>
+            <columns><strong>{{ 'quote.status_change.id'|trans({}, 'email') }}</strong></columns>
+            <columns><a href="{{ url('_quotes_view', {'id' : quote.id}) }}">{{ quote.id }}</a></columns>
+        </row>
+        <row>
+            <columns><strong>{{ 'quote.status_change.new_status'|trans({}, 'email') }}</strong></columns>
+            <columns>{{ quote_label(quote.status) }}</columns>
+        </row>
+
+        <center data-parsed="">
+            <table class="button success float-center">
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="{{ url('_quotes_view', {'id' : quote.id}) }}">{{ 'quote.status_change.view_quote'|trans({}, 'email') }}</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    {% endapply %}
+{%- endblock -%}

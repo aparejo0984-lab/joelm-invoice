@@ -1,0 +1,27 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+
+{% block title %}{{ 'tax.rates.title'|trans }}{% endblock title %}
+
+{% block content %}
+    <div class="widget">
+	    {{ render_grid('tax_grid') }}
+    </div>
+{% endblock %}
+
+{% block heading %}
+    <div class="float-right header-button">
+        <a class="btn btn-info" href="{{ path("_tax_rates_add") }}">
+        {{ icon('money') }} {{ "tax.rates.add"|trans }}
+        </a>
+    </div>
+    <br class="clear" />
+{% endblock %}

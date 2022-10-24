@@ -1,0 +1,3 @@
+_dashboard:
+    path: /dashboard
+    defaults: { _controller: 'SolidInvoice\DashboardBundle\Action\Index' }

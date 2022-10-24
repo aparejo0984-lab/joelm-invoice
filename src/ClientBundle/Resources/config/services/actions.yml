@@ -1,0 +1,5 @@
+services:
+    SolidInvoice\ClientBundle\Action\:
+        resource: '../../../Action'
+        autowire: true
+        tags: ['controller.service_arguments']

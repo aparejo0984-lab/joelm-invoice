@@ -1,0 +1,15 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends '@SolidInvoiceCore/Layout/default_no_nav.html.twig' %}
+
+{% block title %}
+    {{ app_logo() }}
+    {{ "installation.title"|trans({"%app_name%" : constant('SolidInvoice\\CoreBundle\\SolidInvoiceCoreBundle::APP_NAME')}) }}
+{% endblock title %}

@@ -1,0 +1,3 @@
+_settings:
+    path: /settings
+    defaults: { _controller: 'SolidInvoice\SettingsBundle\Action\Index' }

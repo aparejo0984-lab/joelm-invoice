@@ -1,0 +1,84 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+
+{% block title %}{{ "profile.show.title"|trans({"%username%" : app.user.username}) }}{% endblock title %}
+
+{% block content %}
+    <div class="card card-primary">
+        <div class="card-body">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>
+                            {{ 'profile.show.username'|trans }}
+                        </th>
+                        <td>
+                            {{ app.user.username }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'profile.show.email'|trans }}
+                        </th>
+                        <td>
+                            {{ app.user.email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'profile.show.mobile'|trans }}
+                        </th>
+                        <td>
+                            {{ app.user.mobile }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'profile.show.last_login'|trans }}
+                        </th>
+                        <td>
+                            {{ app.user.lastLogin|date }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'profile.show.enabled'|trans }}
+                        </th>
+                        <td>
+                            {% if app.user.enabled %}
+                                <span class="badge badge-pill bg-green">{{ 'profile.show.yes'|trans }}</span>
+                            {% else %}
+                                <span class="badge badge-pill bg-red">{{ 'profile.show.no'|trans }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'profile.show.roles'|trans }}
+                        </th>
+                        <td>
+                            {{ app.user.roles|join(', ') }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card-footer">
+            <a href="{{ path('_edit_profile') }}" class="btn btn-primary">
+                {{ icon('user') }} {{ 'profile.show.update_profile'|trans }}
+            </a>
+            <a href="{{ path('_change_password') }}" class="btn btn-info">
+                {{ icon('key') }} {{ 'profile.show.change_password'|trans }}
+            </a>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,62 @@
+name: CS
+
+on: [ pull_request ]
+
+jobs:
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: PHP-CS-Fixer
+        uses: docker://oskarstark/php-cs-fixer-ga
+
+  composer-normalize:
+    name: Composer Normalize
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run composer normalize
+        uses: docker://ergebnis/composer-normalize-action:latest
+
+
+  lint:
+    name: Lint
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
+
+      - run: yarn install
+
+      - name: Super-Linter
+        uses: github/super-linter/slim@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: 2.1.x
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CSS_FILE_NAME: .stylelintrc.json
+          VALIDATE_YAML: true
+          VALIDATE_JSON: true
+          VALIDATE_XML: true
+          VALIDATE_MD: true
+          VALIDATE_GITLEAKS: true
+          VALIDATE_BASH: true
+          VALIDATE_PHP_BUILTIN: true
+          LINTER_RULES_PATH: .
+          VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_CSS: true

@@ -1,0 +1,129 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% set currency = invoice.client.currency %}
+
+{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+
+{% block page_title %}
+    {{ "invoice.title"|trans({"%id%" : invoice.id}) }}
+{% endblock page_title %}
+
+{% block sidebar %}
+    {{ menu('invoices_view', {'client': invoice.client}) }}
+{% endblock sidebar %}
+
+{% block content %}
+    <div class="float-right no-print mt-3">
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group mr-2" role="group">
+                {% if invoice.quote is not null %}
+                    <a href="{{ path('_quotes_view', {'id' : invoice.quote.id}) }}" class="btn btn-secondary">
+                        {{ icon('file-text-o') }} {{ "invoice.view.toolbar.view_quote"|trans }}
+                    </a>
+                {% endif %}
+{#                <a href="{{ path('_invoices_clone', {'id' : invoice.id}) }}" class="btn btn-secondary">
+                    {{ icon('clone') }} {{ "invoice.view.toolbar.clone"|trans }}
+                </a>#}
+
+{#                {% if workflow_can(invoice, 'pay') %}
+                    <a href="{{ path('_payments_create', {'uuid' : invoice.uuid}) }}" class="btn btn-primary">
+                        {{ icon('credit-card') }} {{ "invoice.view.toolbar.pay_now"|trans }}
+                    </a>
+                {% endif %}#}
+
+                {% if invoice.status not in ['cancelled'] %}
+                    <a href="{{ path('_send_invoice', {'id' : invoice.id}) }}" class="btn btn-info">
+                        {{ icon('envelope-o') }} {{ "invoice.view.toolbar.send"|trans }}
+                    </a>
+                {% endif %}
+
+                {% if workflow_can(invoice, 'reopen') %}
+
+                    <a href="{{ path('_action_invoice', {'action' : 'reopen', 'id' : invoice.id}) }}" class="btn btn-secondary">
+                        {{ icon('reply') }} {{ "invoice.view.toolbar.reopen"|trans }}
+                    </a>
+                {% endif %}
+                {% if workflow_can(invoice, 'cancel') %}
+                    <a href="{{ path('_action_invoice', {'action' : 'cancel', 'id' : invoice.id}) }}"
+                       class="btn btn-warning">
+                        {{ icon('ban') }} {{ "invoice.view.toolbar.cancel"|trans }}
+                    </a>
+                {% endif %}
+
+                {% if workflow_can(invoice, 'edit') %}
+                    <a href="{{ path('_invoices_edit', {'id' : invoice.id}) }}" class="btn btn-secondary">
+                        {{ icon('edit') }} {{ "invoice.view.toolbar.edit"|trans }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <br class="clear"/>
+    <br class="clear"/>
+
+    {% embed "@SolidInvoiceInvoice/invoice_template.html.twig" %}
+        {% block footer %}
+            {{ parent() }}
+
+            {% if invoice.notes is not empty %}
+                <div class="col-6 no-print">
+                    <strong>{{ 'invoice.notes'|trans }}</strong>
+                    <p class="text-muted well well-sm no-shadow">
+                        {{ invoice.notes }}
+                    </p>
+                </div>
+            {% endif %}
+            <br class="clear"/>
+            <div class="row no-print">
+                <div class="col-12">
+                    <div class="btn-group">
+                        {#<a href="javascript:window.print()" class="btn btn-secondary">{{ icon('print') }} {{ 'invoice.action.print'|trans }}</a>#}
+                        {% if can_print_pdf() %}
+                            <a href="{{ path('_invoices_view', {'id': invoice.id, '_format': 'pdf'}) }}" target="_blank" class="btn btn-secondary">{{ icon('file-pdf-o') }} {{ 'invoice.action.pdf'|trans }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endblock footer %}
+    {% endembed %}
+
+    {% if payments|length > 0 %}
+        <div class="invoice box no-print">
+            <div class="card-body">
+                {% include "@SolidInvoicePayment/Payment/list.html.twig" with {"data" : {'invoice' : invoice.id}, 'grid' : 'invoice_payment_grid'} only %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="payment-modal-label"
+         aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="payment-modal-label">{{ 'invoice.add_payment'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'invoice.payment.capture'|trans }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    {{ 'invoice.save.cancel'|trans }}
+                </button>
+                <a href="{{ path('_action_invoice', {'action' : 'pay', 'id' : invoice.id}) }}" class="btn btn-success">
+                    {{ icon('money') }} {{ 'invoice.mark_paid'|trans }}
+                </a>
+                <a href="{{ path('_payments_create', {'uuid' : invoice.uuid}) }}" class="btn btn-primary">
+                    {{ icon('credit-card') }} {{ 'invoice.capture_payment'|trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

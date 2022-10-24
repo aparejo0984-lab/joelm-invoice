@@ -1,0 +1,39 @@
+services:
+    solidinvoice_invoice.menu:
+        class: SolidInvoice\InvoiceBundle\Menu\Builder
+        tags:
+            - { name: cs_core.menu, menu: sidebar, method: sidebar }
+
+    SolidInvoice\InvoiceBundle\Manager\InvoiceManager:
+        autowire: true
+        arguments:
+            $stateMachine: '@state_machine.invoice'
+        calls:
+            - [ setContainer, ['@service_container']]
+
+    SolidInvoice\InvoiceBundle\Listener\Doctrine\InvoiceSaveListener:
+        arguments: ['@solidinvoice.payment.locator']
+        tags: ['doctrine.event_subscriber']
+
+    SolidInvoice\InvoiceBundle\Cron\RecurringInvoiceCreate:
+        autowire: true
+        arguments:
+            $stateMachine: '@state_machine.invoice'
+        tags:
+            - { name: cron.command }
+
+    SolidInvoice\InvoiceBundle\Cloner\InvoiceCloner:
+        autowire: true
+
+    SolidInvoice\InvoiceBundle\Repository\InvoiceRepository:
+        autowire: true
+        tags: ['doctrine.repository_service']
+
+    SolidInvoice\InvoiceBundle\Repository\RecurringInvoiceRepository:
+        autowire: true
+        tags: ['doctrine.repository_service']
+
+    # Fixtures
+    SolidInvoice\InvoiceBundle\DataFixtures\ORM\:
+        resource: '%kernel.project_dir%/src/InvoiceBundle/DataFixtures/ORM/*'
+        tags: ['doctrine.fixture.orm']

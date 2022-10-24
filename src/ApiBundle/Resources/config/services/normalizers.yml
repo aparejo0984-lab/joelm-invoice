@@ -1,0 +1,10 @@
+services:
+    SolidInvoice\ApiBundle\Serializer\Normalizer\:
+        resource: '../../../Serializer/Normalizer/'
+        autowire: true
+        public: false
+        lazy: true
+        tags:
+            - { name: 'serializer.normalizer', priority: 64 }
+        arguments:
+            $normalizer: '@api_platform.serializer.normalizer.item'

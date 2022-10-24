@@ -1,0 +1,31 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+
+{% block title %}{{ 'clients'|trans }}{% endblock title %}
+
+{% block heading %}
+    <div class="float-right header-button">
+        <a class="btn btn-info" href="{{ path("_clients_add") }}">
+            {{ icon('user-plus') }} {{ "client_create"|trans }}
+        </a>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    {{ menu('clients_index') }}
+{% endblock sidebar %}
+
+{% block content %}
+    <br class="clearfix" />
+    <div class="widget">
+	    {{ render_multiple_grid('active_client_grid', 'archive_client_grid') }}
+    </div>
+{% endblock %}

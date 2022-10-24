@@ -1,0 +1,77 @@
+{
+    "name": "solidinvoice",
+    "description": "SolidInvoice Billing Application",
+    "version": "2.0.4",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SolidInvoice/SolidInvoice.git"
+    },
+    "keywords": [
+        "billing"
+    ],
+    "author": "Pierre du Plessis",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/SolidInvoice/SolidInvoice/issues"
+    },
+    "homepage": "https://solidinvoice.co",
+    "scripts": {
+        "dev": "encore dev",
+        "dev-server": "encore dev-server --https --disable-host-check",
+        "build": "encore production",
+        "lint:js": "eslint src",
+        "lint:css": "stylelint 'src/**/*.{scss,css}'"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.4.3",
+        "@babel/core": "^7.4.3",
+        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+        "@babel/preset-env": "^7.4.3",
+        "@symfony/webpack-encore": "^3.1.0",
+        "babel-eslint": "^10.0.1",
+        "babel-loader": "^8.0.6",
+        "eslint": "^7.22.0",
+        "eslint-loader": "^4.0.0",
+        "eslint-plugin-backbone": "^2.1.1",
+        "eslint-plugin-jasmine": "^4.1.2",
+        "eslint-plugin-jest": "^24.3.2",
+        "eslint-plugin-lodash": "^6.0.0",
+        "eslint-plugin-no-jquery": "^2.4.1",
+        "handlebars-loader": "^1.7.1",
+        "jasmine": "^3.4.0",
+        "node-sass": "^7.0.0",
+        "postcss-scss": "^4.0.2",
+        "sass-loader": "^11.0.0",
+        "stylelint": "^14.1.0",
+        "stylelint-config-recommended": "^6.0.0",
+        "stylelint-scss": "^4.0.1",
+        "webpack-notifier": "^1.15.0"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.13.0",
+        "accounting": "^0.4.1",
+        "admin-lte": "^3.0.4",
+        "backbone": "^1.4.0",
+        "backbone.marionette": "^4.1.2",
+        "backbone.paginator": "^2.0.8",
+        "backbone.radio": "^2.0.0",
+        "backgrid": "^0.3.8",
+        "backgrid-filter": "^0.3.7",
+        "backgrid-paginator": "^0.3.9",
+        "backgrid-select-all": "^0.3.5",
+        "bazinga-translator": "^2.6.6",
+        "bootstrap": "^4.4.1",
+        "bootstrap-material-datetimepicker": "^2.7.3",
+        "handlebars": "^4.5.1",
+        "jquery": "^3.5.0",
+        "jquery-placeholder": "^2.3.1",
+        "lodash": "^4.17.19",
+        "marionette.approuter": "^1.0.2",
+        "moment": "^2.29.4",
+        "parsleyjs": "^2.9.0",
+        "regenerator-runtime": "^0.13.3",
+        "select2": "^4.0.6-rc.1",
+        "select2-bootstrap-theme": "^0.1.0-beta.10",
+        "underscore": "^1.9.1"
+    }
+}

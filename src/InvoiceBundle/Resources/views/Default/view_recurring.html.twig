@@ -1,0 +1,102 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% set currency = invoice.client.currency %}
+{% set module = 'recurring-invoice-view' %}
+{% set moduleData = {'frequency': invoice.frequency} %}
+
+{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+
+{% block page_title %}
+    {{ "invoice.title"|trans({"%id%" : invoice.id}) }}
+{% endblock page_title %}
+
+{% block sidebar %}
+    {{ menu('invoices_view', {'client': invoice.client}) }}
+{% endblock sidebar %}
+
+{% block content %}
+    <div class="float-right no-print mt-3">
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group mr-2" role="group">
+                <a href="{{ path('_invoices_clone_recurring', {'id' : invoice.id}) }}" class="btn btn-secondary">
+                    {{ icon('clone') }} {{ "invoice.view.toolbar.clone"|trans }}
+                </a>
+
+                {% if workflow_can(invoice, 'cancel') %}
+                    <a href="{{ path('_action_recurring_invoice', {'action' : 'cancel', 'id' : invoice.id}) }}"
+                       class="btn btn-warning">
+                        {{ icon('ban') }} {{ "invoice.view.toolbar.cancel"|trans }}
+                    </a>
+                {% endif %}
+
+                {% if workflow_can(invoice, 'edit') %}
+                    <a href="{{ path('_invoices_edit_recurring', {'id' : invoice.id}) }}" class="btn btn-secondary">
+                        {{ icon('edit') }} {{ "invoice.view.toolbar.edit"|trans }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <br class="clear"/>
+    <br class="clear"/>
+
+    {% embed "@SolidInvoiceInvoice/invoice_template.html.twig" %}
+        {% block title %}
+            <h2 class="page-header">
+                {{ "invoice.title"|trans({"%id%" : invoice.id}) }}
+                <span class="badge badge-pill bg-success">{{ 'invoice.recurring.view.label'|trans }}</span>
+                {{ invoice_label(invoice.status) }}
+            </h2>
+        {% endblock %}
+
+        {% block footer %}
+            {{ parent() }}
+
+            {% if invoice.notes is not empty %}
+                <div class="col-6 no-print">
+                    <strong>{{ 'invoice.notes'|trans }}</strong>
+                    <p class="text-muted well well-sm no-shadow">
+                        {{ invoice.notes }}
+                    </p>
+                </div>
+            {% endif %}
+
+            <div class="row no-print">
+                <div class="col-12">
+                    <div class="btn-group">
+                        <a href="javascript:window.print()" class="btn btn-secondary">{{ icon('print') }} {{ 'invoice.action.print'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endblock footer %}
+
+        {% block header %}
+            {{ parent() }}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        {{ icon('refresh') }}
+                        <span id="recurring"></span>
+                        {{ 'invoice.recurring.view.starting'|trans }}
+                        {{ invoice.dateStart|date('d F Y') }}
+                        {% if invoice.dateEnd is not empty %}
+                            {{ 'invoice.recurring.view.ending'|trans }}
+                            {{ invoice.dateEnd|date('d F Y') }}
+                        {% endif %}
+                    </div>
+                    <br class="clearfix" />
+                </div>
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock content %}
+

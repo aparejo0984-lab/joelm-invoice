@@ -1,0 +1,23 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+
+{% block title %}{{ 'tax.rates.add'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="card card-primary">
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_row(form) }}
+            <button type="submit" class="btn btn-success">{{ icon('save') }} {{ 'tax.rates.save'|trans }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock content %}

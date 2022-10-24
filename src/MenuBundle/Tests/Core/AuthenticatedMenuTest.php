@@ -1,0 +1,97 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of SolidInvoice project.
+ *
+ * (c) Pierre du Plessis <open-source@solidworx.co>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace SolidInvoice\MenuBundle\Tests\Core;
+
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as M;
+use Mockery\MockInterface;
+use PHPUnit\Framework\TestCase;
+use SolidInvoice\MenuBundle\Core\AuthenticatedMenu;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
+
+class AuthenticatedMenuTest extends TestCase
+{
+    use MockeryPHPUnitIntegration;
+
+    /**
+     * @var MockInterface
+     */
+    private $container;
+
+    /**
+     * @var MockInterface
+     */
+    private $security;
+
+    public function setUp(): void
+    {
+        $this->container = M::mock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $this->security = M::mock('Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface');
+    }
+
+    public function testValidate()
+    {
+        $menu = new AuthenticatedMenu();
+        $menu->setContainer($this->container);
+
+        $this->container->shouldReceive('get')
+            ->once()
+            ->withArgs(['security.authorization_checker'])
+            ->andReturn($this->security);
+
+        $this->security->shouldReceive('isGranted')
+            ->once()
+            ->withArgs(['IS_AUTHENTICATED_REMEMBERED'])
+            ->andReturn(true);
+
+        static::assertTrue($menu->validate());
+
+        $this->security->shouldHaveReceived('isGranted')->once()->withArgs(['IS_AUTHENTICATED_REMEMBERED']);
+    }
+
+    public function testValidateFail()
+    {
+        $menu = new AuthenticatedMenu();
+        $menu->setContainer($this->container);
+
+        $this->container->shouldReceive('get')
+            ->once()
+            ->withArgs(['security.authorization_checker'])
+            ->andReturn($this->security);
+
+        $this->security->shouldReceive('isGranted')
+            ->once()
+            ->withArgs(['IS_AUTHENTICATED_REMEMBERED'])
+            ->andReturn(false);
+
+        static::assertFalse($menu->validate());
+
+        $this->security->shouldHaveReceived('isGranted')->once()->withArgs(['IS_AUTHENTICATED_REMEMBERED']);
+    }
+
+    public function testValidateFailException()
+    {
+        $menu = new AuthenticatedMenu();
+        $menu->setContainer($this->container);
+
+        $this->container->shouldReceive('get')
+            ->once()
+            ->withArgs(['security.authorization_checker'])
+            ->andThrow(new AuthenticationCredentialsNotFoundException());
+
+        static::assertFalse($menu->validate());
+
+        $this->security->shouldNotHaveReceived('isGranted');
+    }
+}

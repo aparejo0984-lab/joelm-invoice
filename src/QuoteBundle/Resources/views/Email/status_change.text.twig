@@ -1,0 +1,14 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{{ 'quote.status_change.heading'|trans({}, 'email') }}
+-------------------
+
+{{ 'quote.status_change.id'|trans({}, 'email') }}: {{ quote.id }}
+{{ 'quote.status_change.new_status'|trans({}, 'email') }}: {{ quote.status }}

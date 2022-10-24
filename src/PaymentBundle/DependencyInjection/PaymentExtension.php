@@ -1,0 +1,57 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of SolidInvoice project.
+ *
+ * (c) Pierre du Plessis <open-source@solidworx.co>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace SolidInvoice\PaymentBundle\DependencyInjection;
+
+use SolidInvoice\PaymentBundle\Factory\PaymentFactories;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+
+class PaymentExtension extends Extension
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $configuration = new Configuration();
+
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $definition = new Definition(PaymentFactories::class);
+
+        $factories = [];
+        $forms = [];
+        foreach ($config['gateways'] as $gateway => $gatewayConfig) {
+            $factories[$gateway] = $gatewayConfig['factory'];
+
+            if (isset($gatewayConfig['form'])) {
+                $forms[$gateway] = $gatewayConfig['form'];
+            }
+        }
+
+        $definition->addMethodCall('setGatewayFactories', [$factories]);
+        $definition->addMethodCall('setGatewayForms', [$forms]);
+
+        $container->setDefinition($definition->getClass(), $definition);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'payment';
+    }
+}

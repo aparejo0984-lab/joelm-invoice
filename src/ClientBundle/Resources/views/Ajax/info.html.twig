@@ -1,0 +1,43 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+<div class="row-fluid">
+    <fieldset>
+        <legend>
+            <h4>
+                {{ client.name }}
+                <small>
+                    (<a href="#" id="client-select-change">{{ "change"|trans }}</a>)
+                </small>
+            </h4>
+        </legend>
+
+        {% if type is defined %}
+            <small>{{ 'client.contacts.info.list'|trans({'%type%': type}) }}</small>
+        {% endif %}
+
+        {% if form is defined %}
+            {{ form_errors(form.users) }}
+            {{ form_row(form.users) }}
+        {% else %}
+            <ul class="nav nav-list">
+                {% for contact in client.contacts %}
+                    <li class="item">
+                        <div class="checkbox">
+                            <label for="client-contact-{{ contact.id }}">
+                                <input type="checkbox" name="{{ type }}[users][]" value="{{ contact.id }}" id="client-contact-{{ contact.id }}" {{ client.contacts|length == 1 ? "checked" : ""}}/>
+                                {{ contact }}
+                            </label>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </fieldset>
+</div>

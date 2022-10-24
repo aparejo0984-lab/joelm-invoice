@@ -1,0 +1,10 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+<span class="badge badge-pill{{ entity.label ? " bg-" ~ entity.label }}"{% if tooltip is defined and tooltip is not empty %}title="{{ tooltip }}" rel="tooltip" {% endif %}>{{ entity.name|title }}</span>

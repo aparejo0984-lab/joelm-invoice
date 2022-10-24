@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^css(.*)$ public/css/$1 [L]
+    RewriteRule ^images(.*)$ public/images/$1 [L]
+    RewriteRule ^js(.*)$ public/js/$1 [L]
+    RewriteRule ^uploads(.*)$ public/uploads/$1 [L]
+    RewriteRule ^bundles(.*)$ public/bundles/$1 [L]
+    RewriteRule ^static(.*)$ public/static/$1 [L]
+    RewriteRule ^swf(.*)$ public/swf/$1 [L]
+    RewriteRule ^(.*)$ public/index.php [QSA,L]
+</IfModule>

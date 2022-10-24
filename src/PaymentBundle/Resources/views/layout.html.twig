@@ -1,0 +1,19 @@
+{% extends "@SolidInvoiceCore/Layout/default_no_nav.html.twig" %}
+
+{% block title %}
+    {{ 'payment.action.pay'|trans }}
+{% endblock title %}
+
+{% block stylesheets %}
+    {{ block('payum_stylesheets') is defined ? block('payum_stylesheets') }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="widget">
+        {{ block('payum_body') is defined ? block('payum_body') }}
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    {{ block('payum_javascripts') is defined ? block('payum_javascripts') }}
+{% endblock scripts %}

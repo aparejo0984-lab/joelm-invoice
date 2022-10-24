@@ -1,0 +1,6 @@
+services:
+    SolidInvoice\DataGridBundle\Repository\GridRepository:
+
+    SolidInvoice\DataGridBundle\Routing\Loader\GridRouteLoader:
+        parent: 'SolidInvoice\CoreBundle\Routing\Loader\AbstractDirectoryLoader'
+        tags: ['routing.loader']

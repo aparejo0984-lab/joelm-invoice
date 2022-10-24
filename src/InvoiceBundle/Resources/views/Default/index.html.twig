@@ -1,0 +1,60 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+
+{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+
+{% block title %}{{ (recurring ? "invoice.list.recurring_title" : "invoice.list.title")|trans }}{% endblock %}
+
+{% block sidebar %}
+    {{ menu('invoices_index') }}
+{% endblock sidebar %}
+
+{% block content %}
+    <div class="row">
+        <div class="{{ recurring ? 'col-12' : 'col-md-9' }}">
+            <div class="widget">
+            {% if recurring %}
+                {{ render_multiple_grid('recurring_invoice_grid', 'archive_recurring_invoice_grid') }}
+            {% else %}
+                {{ render_multiple_grid('active_invoice_grid', 'archive_invoice_grid') }}
+
+                <h5>{{ "invoice.list.status_legend"|trans }}</h5>
+
+                {% for status in invoice_label() %}
+                    {{ status|raw }}
+                {% endfor %}
+            {% endif %}
+            </div>
+
+        </div>
+        {% if not recurring %}
+            <div class="col-md-3">
+                <div class="card right-nav">
+                    <div class="card-body">
+                        <a class="btn btn-block btn-info action-button" href="{{ path("_invoices_create") }}">
+                            {{ icon('file', ['text', 'o']) }} {{ "invoice.action.create"|trans }}
+                        </a>
+
+                        <ul class="list-group list-group-unbordered">
+                            {% for status, count in status_list_count %}
+                                <li class="list-group-item">
+                                    <span class="badge badge-pill">{{ count }}</span>
+                                    {{ ('invoice.stats.count.' ~ status)|transchoice(count) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}
+

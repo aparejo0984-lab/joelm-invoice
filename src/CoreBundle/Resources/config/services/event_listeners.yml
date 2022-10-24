@@ -1,0 +1,20 @@
+services:
+    _instanceof:
+        Symfony\Component\EventDispatcher\EventSubscriberInterface:
+            autowire: true
+            public: false
+            tags:
+                - { name: kernel.event_subscriber }
+
+    SolidInvoice\CoreBundle\Listener\:
+        resource: '../../../Listener'
+
+    SolidInvoice\CoreBundle\Listener\DoctrineExtensionListener:
+        calls:
+            - [setContainer, ['@service_container']]
+
+    SolidInvoice\CoreBundle\Listener\SessionRequestListener:
+        arguments:
+            $secret: '%env(secret)%'
+
+    SolidInvoice\CoreBundle\Listener\TemplateListener: ~

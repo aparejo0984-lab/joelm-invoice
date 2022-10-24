@@ -1,0 +1,14 @@
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    SolidInvoice\SettingsBundle\SystemConfig:
+        lazy: true
+
+    settings:
+        alias: SolidInvoice\SettingsBundle\SystemConfig
+        public: true
+
+    SolidInvoice\SettingsBundle\Repository\SettingsRepository: ~

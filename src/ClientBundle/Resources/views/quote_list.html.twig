@@ -1,0 +1,19 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+<div class="card no-border">
+    <div class="card-header">
+        <h3 class="card-title">
+            {{ icon('file', ['text', 'o']) }} {{ "quotes"|trans }}
+        </h3>
+    </div>
+    <div class="card-body">
+        {{ render_grid('active_quote_grid', {'client' : client.id}) }}
+    </div>
+</div>
