@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Solidquote package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -7,19 +7,9 @@
  # with this source code in the file LICENSE.
  #}
 
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <style type="text/css">
-        {{ file(asset('static/pdf.css')) }}
-
-        @page {
-            margin-top: 2.5cm;
-            margin-bottom: 2.5cm;
-            margin-left: 1cm;
-            margin-right: 1cm;
-            footer: footer;
-        }
-
         .sliced-details {
             float: right;
             text-align: right;
@@ -28,41 +18,51 @@
         .sliced-details td {
             text-align: right;
         }
+        table, th, td {
+            border-radius: 10px;
+            padding: 15px;
+            text-align: left;
+        }
+        .quote-details th {
+            background-color:#ff8c00;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .quote-total {
+            background-color:#ff8c00;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
     </style>
-    <meta charset="UTF-8" />
 </head>
 <body>
-
-<watermarktext content="{{ quote.status|upper }}" alpha="0.1"/>
-
 <htmlpageheader name="header">
-    <h2 class="page-header">
-        {{ app_logo() }}
-        {{ setting('system/company/company_name') }}
-    </h2>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ app_logo() }}    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ app_ecra_logo() }}
+    <h2 class="page-header">{{ setting('system/company/company_name') }}</h2>
 </htmlpageheader>
-
-<pagefooter name="footer" content-left="{{ "powered_by"|trans }} {{ constant('SolidInvoice\\CoreBundle\\SolidInvoiceCoreBundle::APP_NAME') }} - {{ app_version }}" content-right="Page {PAGENO} of {nb}" line="on" footer-style="border-top: 1px solid #000000; font-size: 9pt; text-align: center; padding-top: 3mm;" footer-style-left="" line="on" />
-
-<sethtmlpageheader name="header" value="on" show-this-page="1" margin-bottom="25"/>
-
+<br>
+<sethtmlpageheader name="header" value="on" show-this-page="1" margin-bottom="5"/>
 <div class="row">
-    <div class="col-12 text-right">
-        <h3 style="font-weight: bold">Quote #{{ quote.id }}</h3>
-    </div>
-</div>
-
-<br/>
-
-<div class="row">
-    <div class="col-4">
-        <b style="font-weight: bold">From:</b>
-        <h4>{{ app_name }}</h4>
-
+    <div class="col-6">
         {% set vatNumber = setting('system/company/vat_number') %}
         {% if vatNumber is not empty %}
             <strong>{{ 'tax.vat_number'|trans }}</strong> {{ vatNumber }}
+            <br/>
         {% endif %}
+        {% set address = setting('system/company/contact_details/address', null, true) %}
+
+        {% for addr in address %}
+            {% if loop.index == 1 %}
+                  {{ addr }} <br/>
+            {% else %}
+                 {{ addr|replace({"\n": ", "}) }}
+            {% endif %}
+
+        {% endfor %}
 
         {% set email = setting('system/company/contact_details/email') %}
         {% if email is not empty %}
@@ -75,36 +75,22 @@
             <br/>
             {{ phoneNumber }}
         {% endif %}
-
-        {% set address = setting('system/company/contact_details/address', null, true) %}
-        {% if address is not empty %}
-            <br/>
-            <address>
-                {{ address(address)|replace({"\n": ", "}) }}
-            </address>
-        {% endif %}
     </div>
-
-    <div class="col-6 sliced-details">
-        <table class="table">
-            <tr>
-                <td>Quote Date</td>
-                <td>{{ quote.created|date('d F Y') }}</td>
-            </tr>
-
-            <tr class="table-active">
-                <td><strong>Total Due</strong></td>
-                <td><strong>{{ quote.total|formatCurrency }}</strong></td>
-            </tr>
-        </table>
+    <div class="row">
+        <div class="col-6">
+          <h4 class="page-header">ESTIMATES: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b style="font-weight: bold; text-transform: uppercase">Date:</b> {{ quote.created | date("F d, Y") }}</h4> 
+          <b style="font-weight: bold">{{ quote.client }}</b>
+        </div>
     </div>
 </div>
-
-<br/>
 <div class="row">
     <div class="col-12">
-        <b style="font-weight: bold">To:</b>
-        <h4>{{ quote.client }}</h4>
+        {% for address in quote.client.addresses %}
+            <address>
+                {{ address|replace({"\n": ", "}) }}<br/>
+            </address>
+        {% endfor %}
         {% if quote.client.website is not empty %}
             <p>
                 <a href="{{ quote.client.website }}" rel="external" target="_blank">
@@ -118,27 +104,11 @@
                 <strong>{{ 'tax.vat_number'|trans }}</strong> {{ quote.client.vatNumber }}
             </p>
         {% endif %}
-
-        {% for address in quote.client.addresses %}
-            <address>
-                {{ address|replace({"\n": ", "}) }}<br/>
-            </address>
-        {% endfor %}
-
-        {% for user in quote.users %}
-            <address class="col-6">
-                {{ user }} &lt;{{ user.email }}&gt;
-                {% for info in user.additionalContactDetails %}
-                    {{ info.type|title }}: {{ info.value }}<br>
-                {% endfor %}
-            </address>
-        {% endfor %}
     </div>
-</div>
-
+</div> <br>
 <div class="row">
     <div class="col-12">
-        <table class="table quote-details">
+        <table class="table quote-details"  style="width:100%">
             <thead>
             <tr>
                 <th>{{ 'quote.item.heading.description'|trans }}</th>
@@ -176,12 +146,13 @@
         </table>
     </div>
 </div>
-
 <div class="row">
     <div class="col-5 sliced-details">
         <table class="table quote-details quote-summary float-right">
             <tbody>
             <tr>
+                <td class="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td class="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td class="text-right">
                     <strong>{{ 'quote.subtotal'|trans }}</strong>
                 </td>
@@ -193,6 +164,8 @@
             </tr>
             {% if quote.tax.positive %}
                 <tr>
+                    <td class="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td class="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td class="text-right">
                         <strong>{{ 'quote.tax'|trans }}</strong>
                     </td>
@@ -203,44 +176,28 @@
                     </td>
                 </tr>
             {% endif %}
-
-            {% if quote.discount.type is not empty %}
-                <tr>
-                    <td class="text-right">
-                        <strong>{{ 'quote.discount'|trans }}</strong>
-                    </td>
-                    <td class="text-right">
-                        <span class="text-danger quote-discount">
-                            -{{ discount(quote)|formatCurrency }}
-                        </span>
-                    </td>
-                </tr>
-            {% endif %}
             <tr>
-                <td class="text-right">
+                <td class="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td class="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td class="text-right quote-total">
                     <strong>
                         {{ 'quote.total'|trans }}
                     </strong>
                 </td>
-                <td class="text-right">
-                    <div class="quote-total">
-                        {{ quote.total|formatCurrency }}
-                    </div>
+                <td class="text-right quote-total">
+                    {{ quote.total|formatCurrency }}
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-</div>
-
-{% if quote.terms is not empty %}
-    <div class="row">
-        <div class="col-6">
-            <strong>{{ 'quote.terms'|trans }}</strong>
+    {% if quote.notes is not empty %}
+        <div class="col-6 no-print">
             <p class="text-muted well well-sm no-shadow">
-                {{ quote.terms|nl2br }}
+                <strong>{{ 'quote.notes'|trans }}:</strong> {{ quote.notes }}
             </p>
         </div>
-    </div>
-{% endif %}
+    {% endif %}
+</div>
 </body>
+</html>

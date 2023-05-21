@@ -28,6 +28,7 @@
                         {{ icon('file-text-o') }} {{ "quote.view.toolbar.view_invoice"|trans }}
                     </a>
                 {% endif %}
+                {#
                 <a href="{{ path('_quotes_clone', {'id' : quote.id}) }}" class="btn btn-secondary">
                     {{ icon('clone') }} {{ "quote.view.toolbar.clone"|trans }}
                 </a>
@@ -41,7 +42,7 @@
                     <a href="{{ path('_transition_quote', {'action': 'decline', 'id' : quote.id}) }}" class="btn btn-danger">
                         {{ icon('times') }} {{ "quote.view.toolbar.decline"|trans }}
                     </a>
-                {% endif %}
+                {% endif %}#}
 
                 {% if workflow_can(quote, 'reopen') %}
                     <a href="{{ path('_transition_quote', {'action': 'reopen', 'id' : quote.id}) }}" class="btn btn-secondary">
@@ -74,11 +75,19 @@
     {% embed "@SolidInvoiceQuote/quote_template.html.twig" %}
         {% block footer %}
             {{ parent() }}
-
+            {% if quote.notes is not empty %}
+                <div class="col-6 no-print">
+                    <strong>{{ 'quote.notes'|trans }}</strong>
+                    <p class="text-muted well well-sm no-shadow">
+                        {{ quote.notes }}
+                    </p>
+                </div>
+            {% endif %}
+            <br><br>
             <div class="row no-print">
                 <div class="col-12">
                     <div class="btn-group">
-                        <a href="javascript:window.print()" class="btn btn-secondary">{{ icon('print') }} {{ 'quote.action.print'|trans }}</a>
+                        {#<a href="javascript:window.print()" class="btn btn-secondary">{{ icon('print') }} {{ 'quote.action.print'|trans }}</a> #}
                         {% if can_print_pdf() %}
                             <a href="{{ path('_quotes_view', {'id': quote.id, '_format': 'pdf'}) }}" target="_blank" class="btn btn-secondary">{{ icon('file-pdf-o') }} {{ 'quote.action.pdf'|trans }}</a>
                         {% endif %}
@@ -90,13 +99,4 @@
 {% endblock content %}
 {% block footer %}
     {{ parent() }}
-
-    {% if quote.notes is not empty %}
-        <div class="col-6 no-print">
-            <strong>{{ 'quote.notes'|trans }}</strong>
-            <p class="text-muted well well-sm no-shadow">
-                {{ quote.notes }}
-            </p>
-        </div>
-    {% endif %}
 {% endblock footer %}

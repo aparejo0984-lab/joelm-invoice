@@ -51,7 +51,7 @@ class QuoteType extends AbstractType
             ]
         );
 
-        $builder->add('discount', DiscountType::class, ['required' => false, 'label' => 'Discount', 'currency' => $options['currency']->getCode()]);
+        /* $builder->add('discount', DiscountType::class, ['required' => false, 'label' => 'Discount', 'currency' => $options['currency']->getCode()]); */
 
         $builder->add(
             'items',
@@ -68,7 +68,7 @@ class QuoteType extends AbstractType
             ]
         );
 
-        $builder->add('terms');
+        /* $builder->add('terms'); */
         $builder->add('notes', null, ['help' => 'Notes will not be visible to the client']);
         $builder->add('total', HiddenMoneyType::class, ['currency' => $options['currency']]);
         $builder->add('baseTotal', HiddenMoneyType::class, ['currency' => $options['currency']]);

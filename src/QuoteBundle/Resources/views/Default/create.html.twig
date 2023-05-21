@@ -98,9 +98,9 @@
                 <br class="clear"/>
 
                 <div class="row">
-                    <div class="col">
+                    {#<div class="col">
                         {{ form_row(form.terms) }}
-                    </div>
+                    </div>#}
                     <div class="col">
                         {{ form_row(form.notes) }}
                     </div>
@@ -131,9 +131,9 @@
     </div>
 {% endblock form_client %}
 
-{% block form_discount %}
+{#{% block form_discount %}
     {{ form_row(form.discount) }}
-{% endblock form_discount %}
+{% endblock form_discount %}#}
 
 {% block form_buttons %}
     <div class="float-left">

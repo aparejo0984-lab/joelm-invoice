@@ -29,10 +29,10 @@ class Builder extends AuthenticatedMenu
      */
     public function sidebar(ItemInterface $menu)
     {
-/*        $menu->addHeader('quotes');
+        $menu->addHeader('quotes');
         $menu->addChild(QuoteMenu::list());
         $menu->addChild(QuoteMenu::create());
 
-        $menu->addDivider();*/
+        $menu->addDivider();
     }
 }

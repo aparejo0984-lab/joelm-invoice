@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2022 at 04:34 PM
+-- Generation Time: May 21, 2023 at 06:01 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -45,7 +45,14 @@ CREATE TABLE `addresses` (
 --
 
 INSERT INTO `addresses` (`id`, `client_id`, `street1`, `street2`, `city`, `state`, `zip`, `country`, `created`, `updated`) VALUES
-(1, 6, '66 Falby Court', NULL, 'Ajax', 'Ontario', 'l1S 3l2', 'CA', '2022-09-18 21:04:04', '2022-10-24 15:53:40');
+(1, 6, '66 Falby Court', NULL, 'Ajax', 'Ontario', 'l1S 3l2', 'CA', '2022-09-18 21:04:04', '2022-10-24 15:53:40'),
+(2, 9, NULL, NULL, NULL, NULL, NULL, NULL, '2022-12-04 02:09:59', '2022-12-04 02:11:37'),
+(3, 11, '132 Railside Road Unit 15', NULL, 'North York', 'Ontario', 'M3A 1A3', 'CA', '2023-01-20 02:29:24', '2023-01-20 02:32:31'),
+(4, 8, '44 Falby Court', NULL, 'Ajax', 'Ontario', 'L1S 3L1', 'CA', '2023-01-20 02:37:32', '2023-01-20 02:37:32'),
+(5, 12, '66 Falby court', NULL, 'Ajax', 'Ontario', 'L1S 3L2', 'CA', '2023-02-01 02:45:04', '2023-02-01 02:45:04'),
+(6, 13, '44 Falby Court', 'Suite 1609', 'Ajax', 'Ontario', NULL, 'CA', '2023-02-10 02:03:34', '2023-02-10 02:17:21'),
+(7, 14, '1605 44 Falby Court', NULL, 'Ajax', 'Ontario', 'L1S 3L1', 'CA', '2023-02-26 02:04:17', '2023-02-26 02:04:17'),
+(8, 15, '44 Falby court', 'Suite 311', 'Ajax', 'ON', 'L1S 3L1', 'CA', '2023-05-12 03:04:34', '2023-05-12 03:14:14');
 
 -- --------------------------------------------------------
 
@@ -100,7 +107,7 @@ CREATE TABLE `app_config` (
 
 INSERT INTO `app_config` (`id`, `setting_key`, `setting_value`, `description`, `field_type`) VALUES
 (1, 'system/company/company_name', 'JOELM ELECTRIC', NULL, 'Symfony\\Component\\Form\\Extension\\Core\\Type\\TextType'),
-(2, 'system/company/logo', 'png|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', NULL, 'SolidInvoice\\CoreBundle\\Form\\Type\\ImageUploadType'),
+(2, 'system/company/logo', 'png|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', NULL, 'SolidInvoice\\CoreBundle\\Form\\Type\\ImageUploadType'),
 (3, 'quote/email_subject', 'New Quotation - #{id}', 'To include the id of the quote in the subject, add the placeholder {id} where you want the id', 'Symfony\\Component\\Form\\Extension\\Core\\Type\\TextType'),
 (4, 'quote/bcc_address', NULL, 'Send BCC copy of quote to this address', 'Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType'),
 (5, 'invoice/email_subject', 'New Invoice - #{id}', 'To include the id of the invoice in the subject, add the placeholder {id} where you want the id', 'Symfony\\Component\\Form\\Extension\\Core\\Type\\TextType'),
@@ -152,7 +159,16 @@ INSERT INTO `clients` (`id`, `name`, `website`, `status`, `currency`, `vat_numbe
 (3, 'Pau Rhea', NULL, 'active', NULL, NULL, NULL, '2022-09-18 20:56:29', '2022-09-18 20:56:29'),
 (4, 'Rey Lariosa', NULL, 'active', NULL, NULL, NULL, '2022-09-18 21:01:13', '2022-09-18 21:01:13'),
 (5, 'Rowena Candelaria', NULL, 'active', NULL, NULL, NULL, '2022-09-18 21:02:03', '2022-09-18 21:02:03'),
-(6, 'Crossbridge Condominium', NULL, 'active', NULL, NULL, NULL, '2022-09-18 21:04:04', '2022-10-24 16:03:26');
+(6, 'Crossbridge Condominium', NULL, 'active', NULL, NULL, NULL, '2022-09-18 21:04:04', '2022-10-24 16:03:26'),
+(7, 'Annabelle', NULL, 'active', NULL, NULL, NULL, '2022-11-08 01:58:17', '2022-11-08 01:58:17'),
+(8, 'DCC#34', NULL, 'active', NULL, NULL, NULL, '2022-11-11 02:21:02', '2023-01-20 02:38:44'),
+(9, '44 Falby', NULL, 'active', NULL, NULL, NULL, '2022-11-22 03:08:55', '2022-12-04 02:26:39'),
+(10, 'GAC Engineering', NULL, 'active', NULL, NULL, NULL, '2022-11-29 01:31:50', '2022-11-29 01:31:50'),
+(11, 'LPG', NULL, 'active', NULL, NULL, NULL, '2023-01-20 02:29:24', '2023-01-20 02:29:24'),
+(12, 'DCC 33 - 66 FALBY COURT', NULL, 'active', NULL, NULL, NULL, '2023-02-01 02:45:04', '2023-02-01 02:45:04'),
+(13, 'Judy Luo', NULL, 'active', NULL, NULL, NULL, '2023-02-10 02:02:07', '2023-02-10 02:02:07'),
+(14, 'Steve Keen', NULL, 'active', NULL, NULL, NULL, '2023-02-26 02:04:17', '2023-02-26 02:04:17'),
+(15, 'Megan Harris', NULL, 'active', NULL, NULL, NULL, '2023-05-12 03:04:34', '2023-05-12 03:04:34');
 
 -- --------------------------------------------------------
 
@@ -179,7 +195,16 @@ INSERT INTO `client_credit` (`id`, `client_id`, `value_amount`, `value_currency`
 (3, 3, 0, NULL, '2022-09-18 20:56:29', '2022-09-18 20:56:29'),
 (4, 4, 0, NULL, '2022-09-18 21:01:13', '2022-09-18 21:01:13'),
 (5, 5, 0, NULL, '2022-09-18 21:02:03', '2022-09-18 21:02:03'),
-(6, 6, 0, NULL, '2022-09-18 21:04:04', '2022-09-18 21:04:04');
+(6, 6, 0, NULL, '2022-09-18 21:04:04', '2022-09-18 21:04:04'),
+(7, 7, 0, NULL, '2022-11-08 01:58:17', '2022-11-08 01:58:17'),
+(8, 8, 0, NULL, '2022-11-11 02:21:02', '2022-11-11 02:21:02'),
+(9, 9, 0, NULL, '2022-11-22 03:08:55', '2022-11-22 03:08:55'),
+(10, 10, 0, NULL, '2022-11-29 01:31:50', '2022-11-29 01:31:50'),
+(11, 11, 0, NULL, '2023-01-20 02:29:24', '2023-01-20 02:29:24'),
+(12, 12, 0, NULL, '2023-02-01 02:45:04', '2023-02-01 02:45:04'),
+(13, 13, 0, NULL, '2023-02-10 02:02:07', '2023-02-10 02:02:07'),
+(14, 14, 0, NULL, '2023-02-26 02:04:17', '2023-02-26 02:04:17'),
+(15, 15, 0, NULL, '2023-05-12 03:04:34', '2023-05-12 03:04:34');
 
 -- --------------------------------------------------------
 
@@ -207,7 +232,16 @@ INSERT INTO `contacts` (`id`, `client_id`, `firstName`, `lastName`, `email`, `cr
 (3, 3, 'Pau Rhea', NULL, 'pau.rhea@gmail.com', '2022-09-18 20:56:29', '2022-09-18 20:56:29'),
 (4, 4, 'Rey', 'Lariosa', 'reylariosa.gacengineering@gmail.com', '2022-09-18 21:01:13', '2022-09-18 21:01:13'),
 (5, 5, 'Rowena', 'Candelaria', 'rowenacandelaria1228@gmail.com', '2022-09-18 21:02:03', '2022-09-18 21:02:03'),
-(6, 6, 'Crossbridge', 'Condominium', '66falbycourt@crossbridgecs.com', '2022-09-18 21:04:04', '2022-10-24 16:03:26');
+(6, 6, 'Crossbridge', 'Condominium', '66falbycourt@crossbridgecs.com', '2022-09-18 21:04:04', '2022-10-24 16:03:26'),
+(7, 7, 'Annabelle', NULL, '44falbycourt@crossbridgecs.com', '2022-11-08 01:58:17', '2022-11-08 01:58:17'),
+(8, 8, 'DCC#34', NULL, '44falbycourt@crossbridgecs.com', '2022-11-11 02:21:02', '2023-01-20 02:38:44'),
+(9, 9, '44 Falby', NULL, '44falbycourt@crossbridgecs.com', '2022-11-22 03:08:55', '2022-12-04 02:24:32'),
+(10, 10, 'GAC Engineering', NULL, 'ecofreros718@gmail.com', '2022-11-29 01:31:50', '2022-11-29 01:31:50'),
+(11, 11, 'LPG', NULL, 'lpj@gmail.com', '2023-01-20 02:29:24', '2023-01-20 02:29:24'),
+(12, 12, 'DCC 33 - 66 FALBY COURT', NULL, '66falbycourt@crossbridgecs.com', '2023-02-01 02:45:04', '2023-02-01 02:45:04'),
+(13, 13, 'Judy Luo', NULL, 'luo.cm.judy@gmail.com', '2023-02-10 02:02:07', '2023-02-10 02:02:07'),
+(14, 14, 'Steve', 'Keen', 'fkeen@sympatico.ca', '2023-02-26 02:04:17', '2023-02-26 02:04:17'),
+(15, 15, 'Megan', 'Harris', 'megan.harris8@icloud.com', '2023-05-12 03:04:34', '2023-05-12 03:04:34');
 
 -- --------------------------------------------------------
 
@@ -336,7 +370,90 @@ INSERT INTO `ext_log_entries` (`id`, `action`, `logged_at`, `object_id`, `object
 (55, 'create', '2022-10-07 03:28:45', '17', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
 (56, 'create', '2022-10-07 03:28:45', '18', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
 (57, 'create', '2022-10-24 15:54:16', '12', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
-(58, 'create', '2022-10-24 15:54:16', '19', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm');
+(58, 'create', '2022-10-24 15:54:16', '19', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(59, 'create', '2022-11-08 01:58:17', '7', 'SolidInvoice\\ClientBundle\\Entity\\Client', 1, 'N;', 'joelm'),
+(60, 'create', '2022-11-08 01:58:17', '7', 'SolidInvoice\\ClientBundle\\Entity\\Contact', 1, 'N;', 'joelm'),
+(61, 'create', '2022-11-08 01:58:17', '7', 'SolidInvoice\\ClientBundle\\Entity\\Credit', 1, 'N;', 'joelm'),
+(62, 'create', '2022-11-08 02:01:28', '1', 'SolidInvoice\\QuoteBundle\\Entity\\Quote', 1, 'N;', 'joelm'),
+(63, 'create', '2022-11-08 02:01:28', '1', 'SolidInvoice\\QuoteBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(64, 'create', '2022-11-08 02:02:25', '13', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(65, 'create', '2022-11-08 02:02:25', '20', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(66, 'create', '2022-11-11 02:21:02', '8', 'SolidInvoice\\ClientBundle\\Entity\\Client', 1, 'N;', 'joelm'),
+(67, 'create', '2022-11-11 02:21:02', '8', 'SolidInvoice\\ClientBundle\\Entity\\Contact', 1, 'N;', 'joelm'),
+(68, 'create', '2022-11-11 02:21:02', '8', 'SolidInvoice\\ClientBundle\\Entity\\Credit', 1, 'N;', 'joelm'),
+(69, 'create', '2022-11-11 02:21:40', '14', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(70, 'create', '2022-11-11 02:21:40', '21', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(71, 'create', '2022-11-11 02:24:14', '15', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(72, 'create', '2022-11-11 02:24:14', '22', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(73, 'create', '2022-11-22 03:08:55', '9', 'SolidInvoice\\ClientBundle\\Entity\\Client', 1, 'N;', 'joelm'),
+(74, 'create', '2022-11-22 03:08:55', '9', 'SolidInvoice\\ClientBundle\\Entity\\Contact', 1, 'N;', 'joelm'),
+(75, 'create', '2022-11-22 03:08:55', '9', 'SolidInvoice\\ClientBundle\\Entity\\Credit', 1, 'N;', 'joelm'),
+(76, 'create', '2022-11-22 03:09:57', '16', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(77, 'create', '2022-11-22 03:09:57', '23', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(78, 'create', '2022-11-29 01:31:50', '10', 'SolidInvoice\\ClientBundle\\Entity\\Client', 1, 'N;', 'joelm'),
+(79, 'create', '2022-11-29 01:31:50', '10', 'SolidInvoice\\ClientBundle\\Entity\\Contact', 1, 'N;', 'joelm'),
+(80, 'create', '2022-11-29 01:31:50', '10', 'SolidInvoice\\ClientBundle\\Entity\\Credit', 1, 'N;', 'joelm'),
+(81, 'create', '2022-11-29 01:32:41', '17', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(82, 'create', '2022-11-29 01:32:41', '24', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(83, 'create', '2022-11-29 01:32:41', '25', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(84, 'create', '2022-12-04 01:58:00', '18', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(85, 'create', '2022-12-04 01:58:00', '26', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(86, 'create', '2022-12-04 02:05:42', '2', 'SolidInvoice\\QuoteBundle\\Entity\\Quote', 1, 'N;', 'joelm'),
+(87, 'create', '2022-12-04 02:05:42', '2', 'SolidInvoice\\QuoteBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(88, 'create', '2022-12-04 02:09:59', '2', 'SolidInvoice\\ClientBundle\\Entity\\Address', 1, 'N;', 'joelm'),
+(89, 'create', '2022-12-04 02:26:01', '19', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(90, 'create', '2022-12-04 02:26:01', '27', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(91, 'create', '2022-12-27 20:21:45', '3', 'SolidInvoice\\QuoteBundle\\Entity\\Quote', 1, 'N;', 'joelm'),
+(92, 'create', '2022-12-27 20:21:45', '3', 'SolidInvoice\\QuoteBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(93, 'create', '2023-01-20 02:29:24', '11', 'SolidInvoice\\ClientBundle\\Entity\\Client', 1, 'N;', 'joelm'),
+(94, 'create', '2023-01-20 02:29:24', '11', 'SolidInvoice\\ClientBundle\\Entity\\Contact', 1, 'N;', 'joelm'),
+(95, 'create', '2023-01-20 02:29:24', '3', 'SolidInvoice\\ClientBundle\\Entity\\Address', 1, 'N;', 'joelm'),
+(96, 'create', '2023-01-20 02:29:24', '11', 'SolidInvoice\\ClientBundle\\Entity\\Credit', 1, 'N;', 'joelm'),
+(97, 'create', '2023-01-20 02:31:38', '20', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(98, 'create', '2023-01-20 02:31:38', '28', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(99, 'create', '2023-01-20 02:31:38', '29', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(100, 'create', '2023-01-20 02:35:48', '21', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(101, 'create', '2023-01-20 02:35:48', '30', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(102, 'create', '2023-01-20 02:37:32', '4', 'SolidInvoice\\ClientBundle\\Entity\\Address', 1, 'N;', 'joelm'),
+(103, 'create', '2023-02-01 02:26:49', '22', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(104, 'create', '2023-02-01 02:26:49', '31', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(105, 'create', '2023-02-01 02:45:04', '12', 'SolidInvoice\\ClientBundle\\Entity\\Client', 1, 'N;', 'joelm'),
+(106, 'create', '2023-02-01 02:45:04', '12', 'SolidInvoice\\ClientBundle\\Entity\\Contact', 1, 'N;', 'joelm'),
+(107, 'create', '2023-02-01 02:45:04', '5', 'SolidInvoice\\ClientBundle\\Entity\\Address', 1, 'N;', 'joelm'),
+(108, 'create', '2023-02-01 02:45:04', '12', 'SolidInvoice\\ClientBundle\\Entity\\Credit', 1, 'N;', 'joelm'),
+(109, 'create', '2023-02-10 01:56:39', '23', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(110, 'create', '2023-02-10 01:56:39', '32', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(111, 'create', '2023-02-10 02:02:07', '13', 'SolidInvoice\\ClientBundle\\Entity\\Client', 1, 'N;', 'joelm'),
+(112, 'create', '2023-02-10 02:02:07', '13', 'SolidInvoice\\ClientBundle\\Entity\\Contact', 1, 'N;', 'joelm'),
+(113, 'create', '2023-02-10 02:02:07', '13', 'SolidInvoice\\ClientBundle\\Entity\\Credit', 1, 'N;', 'joelm'),
+(114, 'create', '2023-02-10 02:03:34', '6', 'SolidInvoice\\ClientBundle\\Entity\\Address', 1, 'N;', 'joelm'),
+(115, 'create', '2023-02-10 02:12:59', '4', 'SolidInvoice\\QuoteBundle\\Entity\\Quote', 1, 'N;', 'joelm'),
+(116, 'create', '2023-02-10 02:12:59', '4', 'SolidInvoice\\QuoteBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(117, 'create', '2023-02-26 02:04:17', '14', 'SolidInvoice\\ClientBundle\\Entity\\Client', 1, 'N;', 'joelm'),
+(118, 'create', '2023-02-26 02:04:17', '14', 'SolidInvoice\\ClientBundle\\Entity\\Contact', 1, 'N;', 'joelm'),
+(119, 'create', '2023-02-26 02:04:17', '7', 'SolidInvoice\\ClientBundle\\Entity\\Address', 1, 'N;', 'joelm'),
+(120, 'create', '2023-02-26 02:04:17', '14', 'SolidInvoice\\ClientBundle\\Entity\\Credit', 1, 'N;', 'joelm'),
+(121, 'create', '2023-02-26 02:05:42', '24', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(122, 'create', '2023-02-26 02:05:42', '33', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(123, 'create', '2023-03-22 16:02:28', '25', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(124, 'create', '2023-03-22 16:02:28', '34', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(125, 'create', '2023-03-22 16:02:28', '35', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(126, 'create', '2023-03-29 13:43:42', '5', 'SolidInvoice\\QuoteBundle\\Entity\\Quote', 1, 'N;', 'joelm'),
+(127, 'create', '2023-03-29 13:43:42', '5', 'SolidInvoice\\QuoteBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(128, 'create', '2023-04-03 01:38:12', '26', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(129, 'create', '2023-04-03 01:38:12', '36', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(130, 'create', '2023-04-03 01:38:12', '37', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(131, 'create', '2023-04-03 01:38:12', '38', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(132, 'create', '2023-04-25 02:40:30', '27', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(133, 'create', '2023-04-25 02:40:30', '39', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(134, 'create', '2023-05-12 03:04:34', '15', 'SolidInvoice\\ClientBundle\\Entity\\Client', 1, 'N;', 'joelm'),
+(135, 'create', '2023-05-12 03:04:34', '15', 'SolidInvoice\\ClientBundle\\Entity\\Contact', 1, 'N;', 'joelm'),
+(136, 'create', '2023-05-12 03:04:34', '8', 'SolidInvoice\\ClientBundle\\Entity\\Address', 1, 'N;', 'joelm'),
+(137, 'create', '2023-05-12 03:04:34', '15', 'SolidInvoice\\ClientBundle\\Entity\\Credit', 1, 'N;', 'joelm'),
+(138, 'create', '2023-05-12 03:05:12', '28', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(139, 'create', '2023-05-12 03:05:12', '40', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm'),
+(140, 'create', '2023-05-12 03:14:49', '29', 'SolidInvoice\\InvoiceBundle\\Entity\\Invoice', 1, 'N;', 'joelm'),
+(141, 'create', '2023-05-12 03:14:49', '41', 'SolidInvoice\\InvoiceBundle\\Entity\\Item', 1, 'N;', 'joelm');
 
 -- --------------------------------------------------------
 
@@ -383,11 +500,28 @@ INSERT INTO `invoices` (`id`, `client_id`, `quote_id`, `uuid`, `status`, `terms`
 (5, 3, NULL, 'dfb53a70-36d6-11ed-b79c-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 75000, 'CAD', 75000, 'CAD', 75000, 'CAD', 0, 'CAD', NULL, NULL, 0, NULL, '2022-09-18 00:20:02', '2022-09-18 21:11:32'),
 (6, 1, NULL, 'edd5b2c4-36d6-11ed-93e7-00d861e67d9e', 'archived', NULL, NULL, NULL, NULL, NULL, 56700, 'CAD', 56700, 'CAD', 56700, 'CAD', 0, 'CAD', NULL, NULL, 0, NULL, '2022-09-18 00:20:26', '2022-09-19 03:09:05'),
 (7, 4, NULL, 'fb496784-36d6-11ed-b5a4-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 280231, 'CAD', 251800, 'CAD', 280231, 'CAD', 28431, 'CAD', NULL, NULL, 0, NULL, '2022-09-18 00:20:48', '2022-09-19 03:03:31'),
-(8, 6, NULL, '0a5b6808-36d7-11ed-8ac9-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 45200, 'CAD', 40000, 'CAD', 45200, 'CAD', 5200, 'CAD', NULL, NULL, 0, NULL, '2022-09-18 00:21:14', '2022-09-19 03:06:18'),
+(8, 6, NULL, '0a5b6808-36d7-11ed-8ac9-00d861e67d9e', 'draft', NULL, 'Cheque payable to Joel Maique', NULL, NULL, NULL, 45200, 'CAD', 40000, 'CAD', 45200, 'CAD', 5200, 'CAD', NULL, NULL, 0, NULL, '2022-09-18 00:21:14', '2022-12-09 03:04:27'),
 (9, 2, NULL, '27d1c706-36d7-11ed-a5e1-00d861e67d9e', 'draft', NULL, 'Send payment through email transfer.', NULL, NULL, NULL, 27120, 'CAD', 24000, 'CAD', 27120, 'CAD', 3120, 'CAD', NULL, NULL, 0, NULL, '2022-09-18 00:22:03', '2022-09-18 20:27:12'),
 (10, 4, NULL, '1831ba6e-41b2-11ed-9893-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 226000, 'CAD', 200000, 'CAD', 226000, 'CAD', 26000, 'CAD', NULL, NULL, 0, NULL, '2022-10-01 19:54:28', '2022-10-01 20:02:26'),
 (11, 4, NULL, '6253004a-45df-11ed-9fca-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 268488, 'CAD', 237600, 'CAD', 268488, 'CAD', 30888, 'CAD', NULL, NULL, 0, NULL, '2022-10-07 03:28:45', '2022-10-07 03:28:45'),
-(12, 6, NULL, '599e289a-53a3-11ed-a44e-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 85880, 'CAD', 76000, 'CAD', 85880, 'CAD', 9880, 'CAD', NULL, NULL, 0, NULL, '2022-10-24 15:54:16', '2022-10-24 15:54:16');
+(12, 6, NULL, '599e289a-53a3-11ed-a44e-00d861e67d9e', 'draft', NULL, 'Cheque payable to Joel Maique', NULL, NULL, NULL, 85880, 'CAD', 76000, 'CAD', 85880, 'CAD', 9880, 'CAD', NULL, NULL, 0, NULL, '2022-10-24 15:54:16', '2022-12-09 03:10:01'),
+(13, 7, NULL, '01e19eca-5f01-11ed-9de6-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 152550, 'CAD', 135000, 'CAD', 152550, 'CAD', 17550, 'CAD', NULL, NULL, 0, NULL, '2022-11-08 02:02:25', '2022-11-08 02:07:28'),
+(14, 8, NULL, '31fe68d0-615f-11ed-8a5f-00d861e67d9e', 'draft', NULL, 'Cheque payable to Joel Maique', NULL, NULL, NULL, 57630, 'CAD', 51000, 'CAD', 57630, 'CAD', 6630, 'CAD', NULL, NULL, 0, NULL, '2022-11-11 02:21:40', '2022-12-09 02:27:00'),
+(15, 8, NULL, '8d8fd800-615f-11ed-8fe6-00d861e67d9e', 'draft', NULL, 'Cheque payable to Joel Maique', NULL, NULL, NULL, 67235, 'CAD', 59500, 'CAD', 67235, 'CAD', 7735, 'CAD', NULL, NULL, 0, NULL, '2022-11-11 02:24:14', '2022-12-09 02:45:42'),
+(16, 8, NULL, 'c347f622-6a0a-11ed-baff-00d861e67d9e', 'draft', NULL, 'Cheque payable to Joel Maique', NULL, NULL, NULL, 152550, 'CAD', 135000, 'CAD', 152550, 'CAD', 17550, 'CAD', NULL, NULL, 0, NULL, '2022-11-22 03:09:57', '2022-12-09 03:02:13'),
+(17, 10, NULL, '55aef6ec-6f7d-11ed-a341-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 265550, 'CAD', 235000, 'CAD', 265550, 'CAD', 30550, 'CAD', NULL, NULL, 0, NULL, '2022-11-29 01:32:41', '2022-11-29 01:33:04'),
+(18, 8, NULL, 'b29d1b5a-736e-11ed-b495-00d861e67d9e', 'draft', NULL, 'Cheque payable to Joel Maique', NULL, NULL, NULL, 22035, 'CAD', 19500, 'CAD', 22035, 'CAD', 2535, 'CAD', NULL, NULL, 0, NULL, '2022-12-04 01:58:00', '2022-12-09 02:50:41'),
+(19, 9, NULL, '9cad48a2-7372-11ed-be83-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 355046, 'CAD', 314200, 'CAD', 355046, 'CAD', 40846, 'CAD', NULL, NULL, 0, NULL, '2022-12-04 02:26:01', '2022-12-04 02:26:01'),
+(20, 11, NULL, '2f2b7848-9862-11ed-96df-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 96300, 'CAD', 92400, 'CAD', 96300, 'CAD', 3900, 'CAD', NULL, NULL, 0, NULL, '2023-01-20 02:31:38', '2023-01-20 02:33:04'),
+(21, 8, NULL, 'c3fe8c9e-9862-11ed-95cf-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 9605, 'CAD', 8500, 'CAD', 9605, 'CAD', 1105, 'CAD', NULL, NULL, 0, NULL, '2023-01-20 02:35:48', '2023-01-20 02:35:48'),
+(22, 12, NULL, '7facae7e-a1cf-11ed-8622-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 231650, 'CAD', 205000, 'CAD', 231650, 'CAD', 26650, 'CAD', NULL, NULL, 0, NULL, '2023-02-01 02:26:49', '2023-02-01 02:49:23'),
+(23, 12, NULL, 'c68fe198-a8dd-11ed-835a-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 18080, 'CAD', 16000, 'CAD', 18080, 'CAD', 2080, 'CAD', NULL, NULL, 0, NULL, '2023-02-10 01:56:39', '2023-02-10 01:56:51'),
+(24, 14, NULL, 'b11dcafa-b571-11ed-acbe-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 124300, 'CAD', 110000, 'CAD', 124300, 'CAD', 14300, 'CAD', NULL, NULL, 0, NULL, '2023-02-26 02:05:42', '2023-02-26 02:05:42'),
+(25, 4, NULL, '900903ac-c8c2-11ed-8476-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 45900, 'CAD', 43300, 'CAD', 45900, 'CAD', 2600, 'CAD', NULL, NULL, 0, NULL, '2023-03-22 16:02:28', '2023-03-22 16:02:28'),
+(26, 4, NULL, '6e3d3e32-d1af-11ed-a727-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 597544, 'CAD', 528800, 'CAD', 597544, 'CAD', 68744, 'CAD', NULL, NULL, 0, NULL, '2023-04-03 01:38:11', '2023-04-03 01:38:12'),
+(27, 10, NULL, 'c79326be-e301-11ed-b0e1-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 680000, 'CAD', 680000, 'CAD', 680000, 'CAD', 0, 'CAD', NULL, NULL, 0, NULL, '2023-04-25 02:40:30', '2023-04-25 13:04:01'),
+(28, 15, NULL, '0bfb167e-f061-11ed-9d13-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 135600, 'CAD', 120000, 'CAD', 135600, 'CAD', 15600, 'CAD', NULL, NULL, 0, NULL, '2023-05-12 03:05:12', '2023-05-12 03:05:12'),
+(29, 15, NULL, '643db4b2-f062-11ed-a53f-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, NULL, 135600, 'CAD', 120000, 'CAD', 135600, 'CAD', 15600, 'CAD', NULL, NULL, 0, NULL, '2023-05-12 03:14:49', '2023-05-12 03:14:49');
 
 -- --------------------------------------------------------
 
@@ -412,11 +546,28 @@ INSERT INTO `invoice_contact` (`invoice_id`, `contact_id`) VALUES
 (5, 3),
 (6, 1),
 (7, 4),
-(8, 1),
+(8, 6),
 (9, 2),
 (10, 4),
 (11, 4),
-(12, 6);
+(12, 6),
+(13, 7),
+(14, 8),
+(15, 8),
+(16, 8),
+(17, 10),
+(18, 8),
+(19, 7),
+(20, 11),
+(21, 8),
+(22, 12),
+(23, 12),
+(24, 14),
+(25, 4),
+(26, 4),
+(27, 10),
+(28, 15),
+(29, 15);
 
 -- --------------------------------------------------------
 
@@ -452,7 +603,7 @@ INSERT INTO `invoice_lines` (`id`, `invoice_id`, `tax_id`, `description`, `qty`,
 (6, 5, NULL, 'Install lighting fixtures', 1, 75000, 'CAD', 75000, 'CAD', '2022-09-18 00:20:02', '2022-09-18 21:11:32', NULL),
 (7, 6, NULL, 'Test 234', 1, 56700, 'CAD', 56700, 'CAD', '2022-09-18 00:20:26', '2022-09-19 03:09:05', NULL),
 (8, 7, 1, '100% completion ( 40 mcewan, bolton)', 1, 200000, 'CAD', 200000, 'CAD', '2022-09-18 00:20:48', '2022-09-19 03:03:31', NULL),
-(9, 8, 1, 'run coaxial for rogers and replaced  lobby potlight', 5, 8000, 'CAD', 40000, 'CAD', '2022-09-18 00:21:14', '2022-09-19 03:06:18', NULL),
+(9, 8, 1, 'run coaxial for rogers and replaced  lobby potlight', 1, 40000, 'CAD', 40000, 'CAD', '2022-09-18 00:21:14', '2022-12-09 03:04:27', NULL),
 (10, 9, 1, 'Suite 311, troubleshoot bedroom lighting and install new light fixture.', 3, 8000, 'CAD', 24000, 'CAD', '2022-09-18 00:22:03', '2022-09-18 20:27:12', NULL),
 (11, 2, 1, 'Electrical Permit', 1, 36100, 'CAD', 36100, 'CAD', '2022-09-18 21:20:12', '2022-09-19 01:43:35', NULL),
 (12, 2, 1, 'Add on 2 counter outlets', 1, 15000, 'CAD', 15000, 'CAD', '2022-09-18 21:20:12', '2022-09-19 01:43:35', NULL),
@@ -462,7 +613,29 @@ INSERT INTO `invoice_lines` (`id`, `invoice_id`, `tax_id`, `description`, `qty`,
 (16, 10, 1, 'Electrical work (100% Completion) 16655 Yonge St Newmarket', 1, 200000, 'CAD', 200000, 'CAD', '2022-10-01 19:54:28', '2022-10-01 20:02:26', NULL),
 (17, 11, 1, 'Electrical works (50% completion, 40 Mcewan Drive UD 6 Bolton)', 1, 200000, 'CAD', 200000, 'CAD', '2022-10-07 03:28:45', '2022-10-07 03:28:45', NULL),
 (18, 11, 1, 'Electrical permit', 1, 37600, 'CAD', 37600, 'CAD', '2022-10-07 03:28:45', '2022-10-07 03:28:45', NULL),
-(19, 12, 1, 'Electrical inspection and work (party room, pot light, lobby and offices)', 1, 76000, 'CAD', 76000, 'CAD', '2022-10-24 15:54:16', '2022-10-24 15:54:17', NULL);
+(19, 12, 1, 'Electrical inspection and work (party room, pot light, lobby and offices)', 1, 76000, 'CAD', 76000, 'CAD', '2022-10-24 15:54:16', '2022-12-09 03:10:01', NULL),
+(20, 13, 1, 'Upgrading old lighting on penthouse hallway.\r\n\r\n\r\nLabour and materials included, removing old fluorescent light fixtures to LED 2\'x2\' light fixtures', 1, 135000, 'CAD', 135000, 'CAD', '2022-11-08 02:02:25', '2022-11-08 02:07:28', NULL),
+(21, 14, 1, 'Install 3 light fixtures, run emt pipe for power supply at B1 parking lot for additional lighting. Materials and labour are included.', 1, 51000, 'CAD', 51000, 'CAD', '2022-11-11 02:21:40', '2022-12-09 02:27:00', NULL),
+(22, 15, 1, 'Replace exit sign at B1 parking area, fixed and re mount 1 light fixture, change 2 garbage chute light fixture to LED fixture with motion sensor (5th and 10th floor).\r\nLabour and materials are included.', 1, 59500, 'CAD', 59500, 'CAD', '2022-11-11 02:24:14', '2022-12-09 02:45:42', NULL),
+(23, 16, 1, 'Upgrading old lighting on\r\npenthouse hallway.\r\n\r\nLabour and materials included,\r\nremoving old fluorescent light\r\nfixtures and changing to LED 2\'x2\'\r\nlight fixtures', 1, 135000, 'CAD', 135000, 'CAD', '2022-11-22 03:09:57', '2022-12-09 03:02:13', NULL),
+(24, 17, 1, 'Electrical work (100% completion) 40 Mcewan Drive UD 6 Bolton', 1, 200000, 'CAD', 200000, 'CAD', '2022-11-29 01:32:41', '2022-11-29 01:33:04', NULL),
+(25, 17, 1, 'Additional 5 electrical outlets', 1, 35000, 'CAD', 35000, 'CAD', '2022-11-29 01:32:41', '2022-11-29 01:33:04', NULL),
+(26, 18, 1, 'Replaced old exit sign at B1 parking lot. Labour and material are included', 1, 19500, 'CAD', 19500, 'CAD', '2022-12-04 01:58:00', '2022-12-09 02:50:41', NULL),
+(27, 19, 1, 'Replaced 7pcs outdoor pole light head to LED 55W 120V. \r\n\r\nNote: just replacing the pole top area light with LED head. Labour and materials are included.', 1, 314200, 'CAD', 314200, 'CAD', '2022-12-04 02:26:01', '2022-12-04 02:26:01', NULL),
+(28, 20, 1, 'Electrical work: re locate potlights switches, run cable and installed 4 receptacle', 1, 30000, 'CAD', 30000, 'CAD', '2023-01-20 02:31:38', '2023-01-20 02:33:04', NULL),
+(29, 20, NULL, 'Materials cost', 1, 62400, 'CAD', 62400, 'CAD', '2023-01-20 02:31:38', '2023-01-20 02:33:04', NULL),
+(30, 21, 1, 'Electrical work: Unit 907 troubleshoot bedroom furnace. Bad cable connection between thermostat and motor.', 1, 8500, 'CAD', 8500, 'CAD', '2023-01-20 02:35:48', '2023-01-20 02:35:48', NULL),
+(31, 22, 1, 'Electrical work: installed 2 switches with dimmer and rewired party room potlights. Troubleshoot wiring connection and junction box for lighting circuit. Replaced 1 potlight in the lobby. Labour and materials included', 1, 205000, 'CAD', 205000, 'CAD', '2023-02-01 02:26:49', '2023-02-01 02:49:23', NULL),
+(32, 23, 1, 'Service call - Troubleshoot party room receptacles.', 1, 16000, 'CAD', 16000, 'CAD', '2023-02-10 01:56:39', '2023-02-10 01:56:51', NULL),
+(33, 24, 1, 'Electrical work : panel change fuse to breaker', 1, 110000, 'CAD', 110000, 'CAD', '2023-02-26 02:05:42', '2023-02-26 02:05:42', NULL),
+(34, 25, NULL, 'Electrical materials + 10%', 1, 23300, 'CAD', 23300, 'CAD', '2023-03-22 16:02:28', '2023-03-22 16:02:29', NULL),
+(35, 25, 1, 'Electrical permit', 1, 20000, 'CAD', 20000, 'CAD', '2023-03-22 16:02:28', '2023-03-22 16:02:29', NULL),
+(36, 26, 1, 'Materials', 1, 59500, 'CAD', 59500, 'CAD', '2023-04-03 01:38:11', '2023-04-03 01:38:12', NULL),
+(37, 26, 1, 'Permit', 1, 69300, 'CAD', 69300, 'CAD', '2023-04-03 01:38:11', '2023-04-03 01:38:12', NULL),
+(38, 26, 1, 'Rutherford project 50% completion', 1, 400000, 'CAD', 400000, 'CAD', '2023-04-03 01:38:11', '2023-04-03 01:38:12', NULL),
+(39, 27, NULL, '40% down payment for Bathurst and Wilson project', 1, 680000, 'CAD', 680000, 'CAD', '2023-04-25 02:40:30', '2023-04-25 13:04:01', NULL),
+(40, 28, 1, 'Panel change fuse to breaker', 1, 120000, 'CAD', 120000, 'CAD', '2023-05-12 03:05:12', '2023-05-12 03:05:12', NULL),
+(41, 29, 1, 'Panel change fuse to breaker', 1, 120000, 'CAD', 120000, 'CAD', '2023-05-12 03:14:49', '2023-05-12 03:14:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -565,6 +738,17 @@ CREATE TABLE `quotes` (
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `quotes`
+--
+
+INSERT INTO `quotes` (`id`, `client_id`, `uuid`, `status`, `terms`, `notes`, `due`, `archived`, `total_amount`, `total_currency`, `baseTotal_amount`, `baseTotal_currency`, `tax_amount`, `tax_currency`, `discount_value_percentage`, `discount_type`, `discount_valueMoney_amount`, `discount_valueMoney_currency`, `created`, `updated`) VALUES
+(1, 1, 'e037e838-5f00-11ed-b77d-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, 152550, 'CAD', 135000, 'CAD', 17550, 'CAD', 0, NULL, 0, NULL, '2022-11-08 02:01:28', '2022-11-08 02:01:28'),
+(2, 1, 'c6417d58-736f-11ed-802d-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, 355046, 'CAD', 314200, 'CAD', 40846, 'CAD', 0, NULL, 0, NULL, '2022-12-04 02:05:42', '2022-12-04 02:05:42'),
+(3, 1, 'b36d6b1a-861b-11ed-a7fc-00d861e67d9e', 'draft', NULL, 'This is a test', NULL, NULL, 2825, 'CAD', 2500, 'CAD', 325, 'CAD', 0, NULL, 0, NULL, '2022-12-27 20:21:45', '2022-12-27 20:51:27'),
+(4, 13, '0ef21166-a8e0-11ed-9ffe-00d861e67d9e', 'draft', NULL, 'I can start 7AM on February 16 2023.', NULL, NULL, 197000, 'CAD', 197000, 'CAD', 0, 'CAD', NULL, NULL, 0, NULL, '2023-02-10 02:12:59', '2023-02-10 03:07:45'),
+(5, 7, 'f495ed80-ce26-11ed-9df5-00d861e67d9e', 'draft', NULL, NULL, NULL, NULL, 87010, 'CAD', 77000, 'CAD', 10010, 'CAD', NULL, NULL, 0, NULL, '2023-03-29 13:43:42', '2023-03-29 13:43:42');
+
 -- --------------------------------------------------------
 
 --
@@ -575,6 +759,17 @@ CREATE TABLE `quote_contact` (
   `quote_id` int(11) NOT NULL,
   `contact_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `quote_contact`
+--
+
+INSERT INTO `quote_contact` (`quote_id`, `contact_id`) VALUES
+(1, 7),
+(2, 9),
+(3, 1),
+(4, 13),
+(5, 7);
 
 -- --------------------------------------------------------
 
@@ -595,6 +790,17 @@ CREATE TABLE `quote_lines` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `quote_lines`
+--
+
+INSERT INTO `quote_lines` (`id`, `quote_id`, `tax_id`, `description`, `qty`, `price_amount`, `price_currency`, `total_amount`, `total_currency`, `created`, `updated`) VALUES
+(1, 1, 1, 'Upgrading old lighting on penthouse hallway', 1, 135000, 'CAD', 135000, 'CAD', '2022-11-08 02:01:28', '2022-11-08 02:01:28'),
+(2, 2, 1, 'Replaced 7 pcs. outdoor pole light head to LED 55W 120V.\r\n\r\nNOTE: Just replacing the pole top area light with LED head.  Labour and materials are included', 1, 314200, 'CAD', 314200, 'CAD', '2022-12-04 02:05:42', '2022-12-04 02:05:42'),
+(3, 3, 1, 'Test Quote', 1, 2500, 'CAD', 2500, 'CAD', '2022-12-27 20:21:45', '2022-12-27 20:51:27'),
+(4, 4, NULL, 'Replacing fuse panel to breaker panel, changing 13 light switches, 1 dimmer, 4 GFCI and run and install light power, switches and receptacle in laundry room. Labour and materials are included.  For the materials: switches, receptacles and cover plates are excluded.', 1, 197000, 'CAD', 197000, 'CAD', '2023-02-10 02:12:59', '2023-02-10 03:07:45'),
+(5, 5, 1, 'Hybrid plug estimates: Run emt 36 meter 1/2 emt conduit and t90 wire for 120Volt outlet. Labour and materials included.', 1, 77000, 'CAD', 77000, 'CAD', '2023-03-29 13:43:42', '2023-03-29 13:43:43');
 
 -- --------------------------------------------------------
 
@@ -916,7 +1122,7 @@ ALTER TABLE `version`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `api_tokens`
@@ -940,19 +1146,19 @@ ALTER TABLE `app_config`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `client_credit`
 --
 ALTER TABLE `client_credit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `contact_details`
@@ -970,19 +1176,19 @@ ALTER TABLE `contact_types`
 -- AUTO_INCREMENT for table `ext_log_entries`
 --
 ALTER TABLE `ext_log_entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `invoice_lines`
 --
 ALTER TABLE `invoice_lines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -1000,13 +1206,13 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `quotes`
 --
 ALTER TABLE `quotes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `quote_lines`
 --
 ALTER TABLE `quote_lines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `recurring_invoices`

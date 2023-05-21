@@ -7,7 +7,7 @@
  # with this source code in the file LICENSE.
  #}
 
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <style type="text/css">
         .sliced-details {
@@ -67,7 +67,7 @@
             {% if loop.index == 1 %}
                   {{ addr }} <br/>
             {% else %}
-                 {{ addr|replace({"\n": ", "}) }}
+                 {{ addr|replace({"\n": " "}) }}
             {% endif %}
 
         {% endfor %}
@@ -87,16 +87,21 @@
     </div>
     <br/>
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <b style="font-weight: bold; text-transform: uppercase">Invoice Number:</b> 10{{ invoice.id }}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b style="font-weight: bold; text-transform: uppercase">Invoice Date:</b> {{ invoice.created | date("F d, Y") }}
         </div>
+           
     </div>
 </div>
-<br/>
-<br/>
+<br><br>
 <div class="row">
     <div class="col-12">
         <b style="font-weight: bold">BILL TO: {{ invoice.client }}</b>
+        {#<h1>ESTIMATES:</h1>#}
+        {#<b style="font-weight: bold">44 Falby Ct Ajax, ON L1S 3L1</b>#}
+        {#<address>44 Falby Ct Ajax, ON L1S 3L1</address>#}
         {% if invoice.client.website is not empty %}
             <p>
                 <a href="{{ invoice.client.website }}" rel="external" target="_blank">
@@ -113,7 +118,7 @@
 
         {% for address in invoice.client.addresses %}
             <address>
-                {{ address|replace({"\n": ", "}) }}<br/>
+                {{ address|replace({"\n": " "}) }}<br/>
             </address>
         {% endfor %}
     </div>
